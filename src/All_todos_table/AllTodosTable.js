@@ -1,15 +1,7 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
 
 const AllTodoTables = (props)=> {
 
-    const todoTest= props.todo.map((todo)=>{
-        return(
-            <div key={todo.id}>
-            <td>{todo.comments}</td>
-            </div>
-        )
-    })
     const allTodos= props.todo.map((todo)=>{
         return(
             <tr key={todo.id}>
@@ -20,7 +12,7 @@ const AllTodoTables = (props)=> {
         )
     })
     return(
-        <table class="table">
+        <table className="table">
   <thead>
     <tr>
       <th scope="col">No.</th>

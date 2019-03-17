@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import FormShow from './FormShow';
 import AddButton from '../All_todos_table/AddButton';
 
@@ -8,14 +8,12 @@ class Form extends React.Component{
         this.state = {
             addForm: false,
             postValue: '',
-            commentsValue: '',
-            postSubmitValue: '',
-            comSubmitValue: ''
+            commentsValue: ''
         }
         this.showForm = this.showForm.bind(this);
         this.handlePostOnChange = this.handlePostOnChange.bind(this);
         this.handleComOnChange = this.handleComOnChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this); 
+        this.lame=this.lame.bind(this);
     }
 
     showForm(){
@@ -35,11 +33,16 @@ class Form extends React.Component{
             commentsValue: event.target.value
         })
     }
+    lame(){
+        alert ("Hi")
+    }
 
     render(){
         if (this.state.addForm){
             return(
-                <FormShow onSubmit={this.handleSubmit} onPostChange={this.handlePostOnChange} onComChange={this.handleComOnChange} pValue={this.state.postValue} cValue={this.state.commentsValue}/>
+                <div>{console.log(this.props.handleSubmit)}
+                    <FormShow lame={this.lame} handleSubmit={this.props.handleSubmit} onPostChange={this.handlePostOnChange} onComChange={this.handleComOnChange} pValue={this.state.postValue} cValue={this.state.commentsValue}/>
+                </div>
             )
         }else{
             return(

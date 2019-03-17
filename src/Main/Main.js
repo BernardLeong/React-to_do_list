@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 // import ReactDOM from 'react-dom';
 import AllTodoTables from '../All_todos_table/AllTodosTable';
 import Form from '../CRUD/CreateForm';
@@ -7,8 +7,12 @@ class Main extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            todos: []
+            todos: [],
+            test: []
         }
+        this.addNewTodo=this.addNewTodo.bind(this);
+        this.handleFormSubmit=this.handleFormSubmit.bind(this);
+        this.addNewTodo=this.addNewTodo.bind(this);
     }
 
     componentDidMount(){
@@ -21,21 +25,30 @@ class Main extends React.Component{
             });
     }
 
+    handleFormSubmit(todos, comments){
+        fetch(`/to_dos.json?todo="hi"`)
+            .then((response) => {return response.json()})
+            .then((data) => {
+                this.setState({ 
+                    todos: data
+                }) 
+            });
+
+        
+      }
+    
+      addNewTodo(todo){
+        this.setState({
+          todos: this.state.todos.concat(todo)
+        })
+      }
+
     render(){
         const todos = this.state.todos
-
-        const todos_map = this.state.todos.map((todo)=>{
-            return(
-                <div key={todo.id}>
-                <div>{todo.to_dos}</div>
-                <div>{todo.comments}</div>
-                </div>
-            )
-        })
         return(
             <div>
             <AllTodoTables todo={todos}/>
-            <Form />
+            <Form handleSubmit={this.handleFormSubmit} todos={this.addNewTodo} />
             </div>
         );
     }
